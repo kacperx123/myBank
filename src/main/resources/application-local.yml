@@ -4,14 +4,25 @@ spring:
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: validate
+
   sql:
     init:
       mode: never
 
-logging:
-  level:
-    root: INFO
-    org.springframework: DEBUG
+  flyway:
+    enabled: true
+    baseline-on-migrate: false
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql
+
+  logging:
+    level:
+      root: INFO
+      org.springframework: DEBUG
+
+

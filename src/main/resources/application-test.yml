@@ -4,3 +4,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true          # pozwala startować na pustej bazie
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql

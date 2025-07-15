@@ -16,7 +16,7 @@ class MybankApplicationTests {
 
 	@Container
 	static PostgreSQLContainer<?> postgres =
-			new PostgreSQLContainer<>("postgres:16-alpine")
+			new PostgreSQLContainer<>("postgres:17-alpine")
 					.withDatabaseName("mybank")
 					.withUsername("postgres")
 					.withPassword("root");

@@ -32,6 +32,9 @@ jobs:
           java-version: 21
           cache: maven
 
+      - name: Ensure Maven Wrapper is executable
+        run: chmod +x mvnw
+
       - name: Build and Verify
         run: ./mvnw -B verify
 

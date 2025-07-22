@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public record Money(BigDecimal amount, Currency currency) {
 
-    /** Domyślna skala (liczba miejsc po przecinku) dla operacji finansowych. */
     public static final int SCALE = 2;
 
     public Money {

@@ -19,7 +19,7 @@ public class OpenAccountService {
         this.clock = clock;
     }
 
-    /** Zwraca identyfikator nowo utworzonego konta. */
+
     public AccountId openAccount(UserId ownerId) {
         Account account = Account.openNew(ownerId, LocalDateTime.now(clock));
         repository.save(account);

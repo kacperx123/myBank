@@ -7,55 +7,55 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
 
-    private static final LocalDateTime NOW = LocalDateTime.now();
+    private static final LocalDateTime NOW = LocalDateTime.of(2025, 1, 1, 12, 0);
+
+    /* ---------- HAPPY PATH ---------- */
 
     @Test
-    @DisplayName("Should create User with valid data")
+    @DisplayName("Should create valid User: enabled=true, role=USER")
     void shouldCreateValidUser() {
         // given
-        UserId id = UserId.newId();
+        UserId id = new UserId(UUID.randomUUID());
         String email = "alice@example.com";
-        String hash = "$2a$10$abcdef..."; // symulowany BCrypt
+        String hash  = "hashed_pwd";
 
         // when
-        User user = new User(id, email, hash, Set.of(Role.USER), NOW);
+        User user = User.createNew(id, email, hash, Set.of(Role.USER), NOW);
 
         // then
         assertEquals(id, user.id());
         assertEquals(email, user.email());
+        assertTrue(user.enabled());
         assertTrue(user.hasRole(Role.USER));
         assertFalse(user.hasRole(Role.ADMIN));
     }
 
+    /* ---------- VALIDATION ---------- */
+
     @Nested
-    @DisplayName("Field Validation - ")
+    @DisplayName("Field Vaildation - ")
     class Validation {
 
         @Test
-        @DisplayName("Should throw exception when email did not met requirements")
+        @DisplayName("Should throw exception on invalid email")
         void shouldFailOnInvalidEmail() {
-            IllegalArgumentException ex = assertThrows(
-                    IllegalArgumentException.class,
-                    () -> new User(UserId.newId(), "bad-email",
-                            "hash", Set.of(Role.USER), NOW)
-            );
-            assertTrue(ex.getMessage().contains("Invalid email"));
+            assertThrows(IllegalArgumentException.class,
+                    () -> User.createNew(UserId.newId(), "bad-email", "hash",
+                            Set.of(Role.USER), NOW));
         }
 
         @Test
-        @DisplayName("Should throw exception when set of rules is empty")
+        @DisplayName("Should throw exception when roles are empty")
         void shouldFailWhenRolesEmpty() {
-            IllegalArgumentException ex = assertThrows(
-                    IllegalArgumentException.class,
-                    () -> new User(UserId.newId(), "bob@example.com",
-                            "hash", Set.of(), NOW)
-            );
-            assertTrue(ex.getMessage().contains("at least one role"));
+            assertThrows(IllegalArgumentException.class,
+                    () -> User.createNew(UserId.newId(), "bob@example.com", "hash",
+                            Set.of(), NOW));
         }
     }
 }

@@ -10,28 +10,31 @@ public record User(
         String email,
         String passwordHash,
         Set<Role> roles,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+
+        boolean enabled
 ) {
 
     private static final Pattern EMAIL_PATTERN =
             Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
 
     public User {
-        Objects.requireNonNull(id,            "id cannot be null");
-        Objects.requireNonNull(email,         "email cannot be null");
-        Objects.requireNonNull(passwordHash,  "passwordHash cannot be null");
-        Objects.requireNonNull(roles,         "roles cannot be null");
-        Objects.requireNonNull(createdAt,     "createdAt cannot be null");
+        Objects.requireNonNull(id);
+        Objects.requireNonNull(email);
+        Objects.requireNonNull(passwordHash);
+        Objects.requireNonNull(roles);
+        Objects.requireNonNull(createdAt);
 
-        if (!EMAIL_PATTERN.matcher(email).matches()) {
+        if (!EMAIL_PATTERN.matcher(email).matches())
             throw new IllegalArgumentException("Invalid email format: " + email);
-        }
-        if (roles.isEmpty()) {
+        if (roles.isEmpty())
             throw new IllegalArgumentException("User must have at least one role");
-        }
     }
 
-    public boolean hasRole(Role role) {
-        return roles.contains(role);
+    public boolean hasRole(Role role) { return roles.contains(role); }
+
+    public static User createNew(UserId id, String email, String hash,
+                                 Set<Role> roles, LocalDateTime now) {
+        return new User(id, email, hash, roles, now, true);
     }
 }

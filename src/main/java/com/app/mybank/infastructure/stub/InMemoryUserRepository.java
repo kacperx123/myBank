@@ -3,6 +3,8 @@ package com.app.mybank.infastructure.stub;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.domain.user.port.UserRepository;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * Nieskonfigurowana, w 100 % pamięciowa implementacja portu UserRepository.
  * <p>Idealna do testów jednostkowych; brak zależności od Springa.</p>
  */
+@Repository
+@Profile("test")
 public class InMemoryUserRepository implements UserRepository {
 
     private final Map<UserId, User> byId      = new ConcurrentHashMap<>();

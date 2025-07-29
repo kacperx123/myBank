@@ -1,13 +1,12 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:mybank
+    driver-class-name: org.h2.Driver
+    username: postgres
+    password: root
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: none
-
+      ddl-auto: none      # lub validate
   flyway:
-    enabled: true
-    baseline-on-migrate: true          # pozwala startować na pustej bazie
-    sql-migration-prefix: V
-    sql-migration-separator: __
-    sql-migration-suffixes: .sql
+    enabled: false

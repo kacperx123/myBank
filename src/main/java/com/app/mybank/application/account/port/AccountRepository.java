@@ -1,4 +1,4 @@
-package com.app.mybank.domain.account.port;
+package com.app.mybank.application.account.port;
 
 import com.app.mybank.domain.account.Account;
 import com.app.mybank.domain.account.AccountId;

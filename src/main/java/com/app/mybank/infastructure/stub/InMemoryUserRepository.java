@@ -2,7 +2,7 @@ package com.app.mybank.infastructure.stub;
 
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
-import com.app.mybank.domain.user.port.UserRepository;
+import com.app.mybank.application.user.port.UserRepository;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 

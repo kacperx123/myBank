@@ -5,7 +5,7 @@ import com.app.mybank.domain.security.PasswordHasher;
 import com.app.mybank.domain.user.Role;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
-import com.app.mybank.domain.user.port.UserRepository;
+import com.app.mybank.application.user.port.UserRepository;
 
 import java.time.Clock;
 import java.time.LocalDateTime;

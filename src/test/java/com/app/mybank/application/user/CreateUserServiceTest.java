@@ -4,7 +4,7 @@ import com.app.mybank.domain.exception.user.EmailAlreadyTakenException;
 import com.app.mybank.domain.security.PasswordHasher;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
-import com.app.mybank.domain.user.port.UserRepository;
+import com.app.mybank.application.user.port.UserRepository;
 import com.app.mybank.infastructure.stub.InMemoryUserRepository;
 import org.junit.jupiter.api.Test;
 

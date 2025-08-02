@@ -1,9 +1,7 @@
 package com.app.mybank.infastructure.security;
 
 import com.app.mybank.domain.user.User;
-import com.app.mybank.domain.user.port.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
+import com.app.mybank.application.user.port.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

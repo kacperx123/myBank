@@ -2,7 +2,7 @@ package com.app.mybank.application.account;
 
 import com.app.mybank.domain.account.Account;
 import com.app.mybank.domain.account.AccountId;
-import com.app.mybank.domain.account.port.AccountRepository;
+import com.app.mybank.application.account.port.AccountRepository;
 import com.app.mybank.domain.user.UserId;
 
 import java.time.Clock;

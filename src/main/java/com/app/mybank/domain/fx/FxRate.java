@@ -6,6 +6,7 @@ import com.app.mybank.domain.exception.fx.InvalidRateException;
 import com.app.mybank.domain.exception.fx.SameCurrencyException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -30,10 +31,15 @@ public record FxRate(
         if (rate.signum() <= 0)   throw new InvalidRateException();
     }
 
-    /** Prosta konwersja bez zaokrągleń. */
     public Money convert(Money from) {
+
         if (!from.currency().equals(base))
             throw new CurrencyMismatchException();
+
+        BigDecimal result = from.amount()
+                .multiply(rate)
+                .setScale(Money.SCALE, RoundingMode.HALF_UP);
+
         return new Money(from.amount().multiply(rate), target);
     }
 }

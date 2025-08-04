@@ -25,7 +25,7 @@ class FxRateTest {
                 LocalDate.now(),
                 LocalDateTime.now());
 
-        Money eur = r.convert(new Money(new BigDecimal("100.00"), PLN));
+        Money eur = r.convert(new Money(new BigDecimal(100.00), PLN));
         assertEquals("25.00", eur.amount().toPlainString());
         assertEquals(EUR, eur.currency());
     }

@@ -1,6 +1,6 @@
 package com.app.mybank.application.transaction.port;
 
-import com.app.mybank.application.transaction.command.account.AccountId;
+import com.app.mybank.domain.account.AccountId;
 import com.app.mybank.domain.transaction.Transaction;
 import com.app.mybank.domain.transaction.TransactionType;
 

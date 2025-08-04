@@ -1,7 +1,7 @@
 package com.app.mybank.infastructure.stub;
 
 import com.app.mybank.application.transaction.port.TransactionRepository;
-import com.app.mybank.application.transaction.command.account.AccountId;
+import com.app.mybank.domain.account.AccountId;
 import com.app.mybank.domain.transaction.Transaction;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;

@@ -1,9 +1,9 @@
 package com.app.mybank.application.account;
 
-import com.app.mybank.application.transaction.command.account.Account;
-import com.app.mybank.application.transaction.command.account.AccountId;
+import com.app.mybank.domain.account.Account;
+import com.app.mybank.domain.account.AccountId;
 import com.app.mybank.application.account.port.AccountRepository;
-import com.app.mybank.application.transaction.command.account.events.AccountCreated;
+import com.app.mybank.domain.account.events.AccountCreated;
 import com.app.mybank.domain.user.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;

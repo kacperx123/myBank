@@ -1,4 +1,4 @@
-package com.app.mybank.application.transaction.command.account;
+package com.app.mybank.domain.account;
 
 import java.util.Objects;
 import java.util.UUID;

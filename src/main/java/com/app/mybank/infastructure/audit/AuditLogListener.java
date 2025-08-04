@@ -1,8 +1,8 @@
 package com.app.mybank.infastructure.audit;
 
-import com.app.mybank.application.transaction.command.account.events.AccountCreated;
-import com.app.mybank.application.transaction.command.account.events.MoneyDeposited;
-import com.app.mybank.application.transaction.command.account.events.MoneyWithdrawn;
+import com.app.mybank.domain.account.events.AccountCreated;
+import com.app.mybank.domain.account.events.MoneyDeposited;
+import com.app.mybank.domain.account.events.MoneyWithdrawn;
 import com.app.mybank.domain.fx.events.CurrencyRateCached;
 import com.app.mybank.domain.transaction.events.TransactionCreated;
 import com.app.mybank.domain.user.events.UserRegistered;

@@ -6,24 +6,23 @@ import com.app.mybank.domain.user.Role;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.application.user.port.UserRepository;
+import com.app.mybank.domain.user.events.UserRegistered;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+@RequiredArgsConstructor
 public class CreateUserService {
 
     private final UserRepository repo;
     private final PasswordHasher passwordHasher; // prosty port na BCrypt/Argon2
+    private final ApplicationEventPublisher publisher;
     private final Clock clock;
 
-    public CreateUserService(UserRepository repo,
-                             PasswordHasher passwordHasher,
-                             Clock clock) {
-        this.repo = repo;
-        this.passwordHasher = passwordHasher;
-        this.clock = clock;
-    }
 
     public UserId register(String email, String rawPassword) {
         repo.findByEmail(email.toLowerCase())
@@ -39,6 +38,11 @@ public class CreateUserService {
         );
 
         repo.save(user);
+
+        publisher.publishEvent(new UserRegistered(
+                user.id(), user.email(), Instant.now(clock)
+        ));
+
         return user.id();
     }
 }

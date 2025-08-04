@@ -3,15 +3,14 @@ package com.app.mybank.application.transaction.command;
 import com.app.mybank.application.account.port.AccountRepository;
 import com.app.mybank.application.transaction.port.TransactionRepository;
 import com.app.mybank.application.transaction.query.GetAccountBalanceService;
-import com.app.mybank.domain.account.Account;
-import com.app.mybank.domain.account.AccountId;
+import com.app.mybank.application.transaction.command.account.Account;
+import com.app.mybank.application.transaction.command.account.AccountId;
 import com.app.mybank.domain.common.Money;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.infastructure.stub.InMemoryAccountRepository;
 import com.app.mybank.infastructure.stub.InMemoryTransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.Clock;
@@ -19,7 +18,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Currency;
-import java.util.Set;
 import java.util.UUID;
 
 import static com.app.mybank.testutil.MoneyTestFactory.pln;

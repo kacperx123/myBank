@@ -1,12 +1,13 @@
 package com.app.mybank.application.account;
 
-import com.app.mybank.domain.account.Account;
+import com.app.mybank.application.transaction.command.account.Account;
 import com.app.mybank.application.account.port.AccountRepository;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.infastructure.stub.InMemoryAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationEventPublisher;
 
 
 import java.time.Clock;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class OpenAccountServiceTest {
 
     private AccountRepository repo;
+    private ApplicationEventPublisher publisher;
     private OpenAccountService service;
     private Clock fixedClock;
 
@@ -28,7 +30,8 @@ class OpenAccountServiceTest {
     void init() {
         repo = new InMemoryAccountRepository();
         fixedClock = Clock.fixed(Instant.parse("2025-01-01T10:00:00Z"), ZoneOffset.UTC);
-        service = new OpenAccountService(repo, fixedClock);
+        publisher = event -> {};
+        service = new OpenAccountService(repo, publisher, fixedClock);
     }
 
     @Test

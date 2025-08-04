@@ -2,8 +2,8 @@ package com.app.mybank.application.transaction.command;
 
 import com.app.mybank.application.account.port.AccountRepository;
 import com.app.mybank.application.transaction.port.TransactionRepository;
-import com.app.mybank.domain.account.Account;
-import com.app.mybank.domain.account.AccountId;
+import com.app.mybank.application.transaction.command.account.Account;
+import com.app.mybank.application.transaction.command.account.AccountId;
 import com.app.mybank.domain.common.Money;
 import com.app.mybank.domain.exception.account.AccountNotFoundException;
 import com.app.mybank.domain.transaction.Transaction;
@@ -11,9 +11,7 @@ import com.app.mybank.domain.transaction.TransactionId;
 import com.app.mybank.domain.transaction.TransactionType;
 import com.app.mybank.domain.transaction.events.TransactionCreated;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Service;
 
 import java.time.Clock;
 import java.time.Instant;

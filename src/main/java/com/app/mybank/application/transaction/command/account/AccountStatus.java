@@ -1,4 +1,4 @@
-package com.app.mybank.domain.account;
+package com.app.mybank.application.transaction.command.account;
 
 public enum AccountStatus {
     ACTIVE,

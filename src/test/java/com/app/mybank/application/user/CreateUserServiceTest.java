@@ -6,7 +6,9 @@ import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.application.user.port.UserRepository;
 import com.app.mybank.infastructure.stub.InMemoryUserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -16,10 +18,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CreateUserServiceTest {
 
-    UserRepository repo = new InMemoryUserRepository();   // analogiczny stub jak przy Account
-    PasswordHasher hasher = raw -> "HASH_" + raw;         // prosty fake
-    Clock clock = Clock.fixed(Instant.parse("2025-01-01T12:00:00Z"), ZoneOffset.UTC);
-    CreateUserService service = new CreateUserService(repo, hasher, clock);
+    UserRepository repo;
+    PasswordHasher hasher;
+    ApplicationEventPublisher publisher;
+    Clock clock;
+    CreateUserService service;
+
+    @BeforeEach
+    void setUp() {
+        repo = new InMemoryUserRepository();
+        hasher = raw -> "HASH_" + raw;
+        publisher = event -> {};
+        clock = Clock.fixed(Instant.parse("2025-01-01T12:00:00Z"), ZoneOffset.UTC);
+        service = new CreateUserService(repo, hasher, publisher, clock);
+    }
 
     @Test
     void shouldRegisterUser() {

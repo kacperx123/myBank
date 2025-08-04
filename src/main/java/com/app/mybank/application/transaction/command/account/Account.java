@@ -1,7 +1,7 @@
-package com.app.mybank.domain.account;
+package com.app.mybank.application.transaction.command.account;
 
-import com.app.mybank.domain.account.events.MoneyDeposited;
-import com.app.mybank.domain.account.events.MoneyWithdrawn;
+import com.app.mybank.application.transaction.command.account.events.MoneyDeposited;
+import com.app.mybank.application.transaction.command.account.events.MoneyWithdrawn;
 import com.app.mybank.domain.common.Money;
 import com.app.mybank.domain.exception.account.*;
 import com.app.mybank.domain.user.UserId;

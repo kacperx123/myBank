@@ -6,6 +6,7 @@ import com.app.mybank.application.account.port.AccountRepository;
 import com.app.mybank.domain.account.events.AccountCreated;
 import com.app.mybank.domain.user.UserId;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.Clock;
@@ -16,9 +17,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class OpenAccountService {
 
+    @Autowired
     private final AccountRepository repository;
-
+    @Autowired
     private final ApplicationEventPublisher publisher;
+    @Autowired
     private final Clock clock;
 
 

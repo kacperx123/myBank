@@ -1,5 +1,7 @@
 package com.app.mybank.domain.user;
 
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -18,6 +20,7 @@ public record User(
     private static final Pattern EMAIL_PATTERN =
             Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
 
+
     public User {
         Objects.requireNonNull(id);
         Objects.requireNonNull(email);
@@ -31,7 +34,9 @@ public record User(
             throw new IllegalArgumentException("User must have at least one role");
     }
 
+
     public boolean hasRole(Role role) { return roles.contains(role); }
+
 
     public static User createNew(UserId id, String email, String hash,
                                  Set<Role> roles, LocalDateTime now) {

@@ -22,9 +22,10 @@ public class InMemoryUserRepository implements UserRepository {
     private final Map<String,  User> byEmailL = new ConcurrentHashMap<>(); // klucz: email lower-case
 
     @Override
-    public void save(User user) {
+    public UserId save(User user) {
         byId.put(user.id(), user);
         byEmailL.put(user.email().toLowerCase(), user);
+        return null;
     }
 
     @Override

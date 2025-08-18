@@ -12,14 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * Encja domenowa typu „immutable plus events”.
- * Dodano:
- *  • status          – ACTIVE / CLOSED / SUSPENDED
- *  • dailyLimit      – limit dzienny wypłat
- *  • locked          – blokada np. na czas postępowania
- *  • withdrawnToday  – suma wypłat w bieżącym dniu (do limitu)
- */
 public record Account(
         AccountId id,
         UserId ownerId,
@@ -45,6 +37,7 @@ public record Account(
         Objects.requireNonNull(withdrawnTodayDate);
         Objects.requireNonNull(domainEvents);
     }
+
 
     /* ---------- Fabryka ---------- */
     public static Account openNew(UserId ownerId, LocalDateTime now) {

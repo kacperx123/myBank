@@ -29,7 +29,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Testcontainers
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-// importujemy nasze adaptery (repozytoria Spring Data znajdzie @DataJpaTest)
 @Import({AccountJpaAdapter.class, UserJpaAdapter.class})
 class AccountJpaAdapterIT {
 

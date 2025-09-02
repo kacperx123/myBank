@@ -6,15 +6,19 @@ import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.persistence.role.RoleJpaEntity;
 import com.app.mybank.persistence.role.RoleJpaRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 @Transactional
+@ConditionalOnBean(javax.sql.DataSource.class)
 public class UserJpaAdapter implements UserRepository {
 
     private final SpringDataUserRepository userRepo;

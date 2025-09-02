@@ -1,7 +1,7 @@
 package com.app.mybank.application.fx.command;
 
 import com.app.mybank.domain.fx.FxRate;
-import com.app.mybank.infastructure.stub.InMemoryFxRateRepository;
+import com.app.mybank.infrastructure.stub.InMemoryFxRateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationEventPublisher;

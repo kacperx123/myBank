@@ -4,7 +4,7 @@ import com.app.mybank.application.fx.port.FxRateRepository;
 import com.app.mybank.domain.exception.fx.InvalidRateException;
 import com.app.mybank.domain.fx.FxRate;
 import com.app.mybank.domain.fx.FxRateId;
-import com.app.mybank.domain.fx.events.CurrencyRateCached;
+import com.app.mybank.domain.fx.events.FxRateCached;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -25,7 +25,7 @@ public class ConvertCurrencyService {
         FxRate rate = repo.latest(new FxRateId(base, target, LocalDate.now(clock)))
                 .orElseThrow(InvalidRateException::new);
 
-        publisher.publishEvent(new CurrencyRateCached(rate, Instant.now(clock)));
+        publisher.publishEvent(new FxRateCached(rate, Instant.now(clock)));
 
         return rate;
     }

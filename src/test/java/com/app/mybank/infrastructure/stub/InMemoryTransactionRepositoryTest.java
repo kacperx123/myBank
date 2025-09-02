@@ -5,7 +5,6 @@ import com.app.mybank.domain.common.Money;
 import com.app.mybank.domain.transaction.Transaction;
 import com.app.mybank.domain.transaction.TransactionId;
 import com.app.mybank.domain.transaction.TransactionType;
-import com.app.mybank.infastructure.stub.InMemoryTransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

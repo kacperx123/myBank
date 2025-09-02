@@ -1,4 +1,4 @@
-package com.app.mybank.infastructure.stub;
+package com.app.mybank.infrastructure.stub;
 
 import com.app.mybank.domain.account.Account;
 import com.app.mybank.domain.account.AccountId;

@@ -1,16 +1,20 @@
 package com.app.mybank.persistence.user;
 
 import com.app.mybank.domain.user.User;
+import com.app.mybank.persistence.role.RoleJpaRepository;
 import com.app.mybank.testutil.UserTestFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -21,7 +25,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 @Testcontainers
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(UserJpaAdapter.class)
+@Import({UserJpaAdapterIT.TestCfg.class})
 class UserJpaAdapterIT {
 
     @Container
@@ -37,9 +41,18 @@ class UserJpaAdapterIT {
         reg.add("spring.datasource.username", db::getUsername);
         reg.add("spring.datasource.password", db::getPassword);
     }
+    @TestConfiguration
+    static class TestCfg {
+        @Bean
+        UserJpaAdapter userJpaAdapter(SpringDataUserRepository userRepo, RoleJpaRepository roleJpaRepository) {
+            return new UserJpaAdapter(userRepo, roleJpaRepository);
+        }
+    }
 
     @Autowired
     UserJpaAdapter adapter;
+    @Autowired
+    SpringDataUserRepository userRepo;
 
     @Test
     void shouldStoreAndRetrieveUser() {
@@ -58,7 +71,9 @@ class UserJpaAdapterIT {
     void shouldEnforceUniqueEmail() {
         adapter.save(UserTestFactory.sample());
         var duplicate = UserTestFactory.sample();
-        assertThatThrownBy(() -> adapter.save(duplicate))
-                .isInstanceOf(DataIntegrityViolationException.class);
+        assertThatThrownBy(() -> {
+            adapter.save(duplicate);
+            userRepo.flush();
+        }).isInstanceOf(org.springframework.dao.DataIntegrityViolationException.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.app.mybank.infastructure.stub;
+package com.app.mybank.infrastructure.stub;
 
 import com.app.mybank.application.fx.port.FxRateRepository;
 import com.app.mybank.domain.fx.FxRate;

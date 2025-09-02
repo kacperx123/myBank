@@ -1,9 +1,8 @@
-package com.app.mybank.infastructure.security;
+package com.app.mybank.infrastructure.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 

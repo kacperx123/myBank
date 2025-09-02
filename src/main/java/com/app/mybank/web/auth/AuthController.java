@@ -1,9 +1,8 @@
 package com.app.mybank.web.auth;
 
-import com.app.mybank.infastructure.security.JwtService;
+import com.app.mybank.infrastructure.security.JwtService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

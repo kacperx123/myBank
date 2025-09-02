@@ -5,7 +5,7 @@ import com.app.mybank.domain.security.PasswordHasher;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.application.user.port.UserRepository;
-import com.app.mybank.infastructure.stub.InMemoryUserRepository;
+import com.app.mybank.infrastructure.stub.InMemoryUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationEventPublisher;

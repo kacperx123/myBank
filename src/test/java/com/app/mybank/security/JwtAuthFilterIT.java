@@ -2,16 +2,21 @@ package com.app.mybank.security;
 
 import com.app.mybank.domain.user.Role;
 import com.app.mybank.domain.user.UserId;
-import com.app.mybank.infastructure.security.JwtService;
-import com.app.mybank.infastructure.stub.InMemoryUserRepository;
+import com.app.mybank.infrastructure.security.JwtService;
+import com.app.mybank.infrastructure.stub.InMemoryUserRepository;
+import com.app.mybank.persistence.user.UserJpaAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -21,11 +26,19 @@ import java.util.Set;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 class JwtAuthFilterIT {
-
+    @org.springframework.boot.test.context.TestConfiguration
+    static class TestCfg {
+        @org.springframework.context.annotation.Bean
+        @org.springframework.context.annotation.Primary
+        com.app.mybank.infrastructure.stub.InMemoryUserRepository inMemoryUserRepository() {
+            return new com.app.mybank.infrastructure.stub.InMemoryUserRepository();
+        }
+    }
+    @MockitoBean
+    UserJpaAdapter userJpaAdapter;
     @Autowired MockMvc mvc;
     @Autowired
     JwtService jwt;
@@ -37,6 +50,8 @@ class JwtAuthFilterIT {
             .password("{noop}x")   // {noop} → bez haszowania
             .roles("USER")
             .build();
+
+
 
     @BeforeEach
     void setUp() {

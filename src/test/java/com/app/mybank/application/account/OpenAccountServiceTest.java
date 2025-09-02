@@ -3,7 +3,7 @@ package com.app.mybank.application.account;
 import com.app.mybank.domain.account.Account;
 import com.app.mybank.application.account.port.AccountRepository;
 import com.app.mybank.domain.user.UserId;
-import com.app.mybank.infastructure.stub.InMemoryAccountRepository;
+import com.app.mybank.infrastructure.stub.InMemoryAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

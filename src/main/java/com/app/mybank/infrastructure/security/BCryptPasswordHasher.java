@@ -1,4 +1,4 @@
-package com.app.mybank.infastructure.security;
+package com.app.mybank.infrastructure.security;
 
 import com.app.mybank.domain.security.PasswordHasher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

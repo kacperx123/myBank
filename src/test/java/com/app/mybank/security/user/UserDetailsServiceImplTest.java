@@ -3,8 +3,8 @@ package com.app.mybank.security.user;
 import com.app.mybank.domain.user.Role;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
-import com.app.mybank.infastructure.security.UserDetailsServiceImpl;
-import com.app.mybank.infastructure.stub.InMemoryUserRepository;
+import com.app.mybank.infrastructure.security.UserDetailsServiceImpl;
+import com.app.mybank.infrastructure.stub.InMemoryUserRepository;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

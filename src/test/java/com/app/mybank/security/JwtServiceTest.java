@@ -1,6 +1,6 @@
 package com.app.mybank.security;
 
-import com.app.mybank.infastructure.security.JwtService;
+import com.app.mybank.infrastructure.security.JwtService;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

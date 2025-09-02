@@ -1,9 +1,7 @@
 package com.app.mybank.config.security;
 
-import com.app.mybank.infastructure.security.JwtAuthFilter;
-import com.app.mybank.infastructure.security.UserDetailsServiceImpl;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.app.mybank.infrastructure.security.JwtAuthFilter;
+import com.app.mybank.infrastructure.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

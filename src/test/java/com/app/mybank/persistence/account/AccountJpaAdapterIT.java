@@ -5,6 +5,8 @@ import com.app.mybank.domain.account.AccountId;
 import com.app.mybank.domain.common.Money;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
+import com.app.mybank.persistence.role.RoleJpaRepository;
+import com.app.mybank.persistence.user.SpringDataUserRepository;
 import com.app.mybank.persistence.user.UserJpaAdapter;
 import com.app.mybank.testutil.UserTestFactory;
 import jakarta.annotation.Resource;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -29,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Testcontainers
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import({AccountJpaAdapter.class, UserJpaAdapter.class})
+@Import({AccountJpaAdapterIT.TestCfg.class})
 class AccountJpaAdapterIT {
 
     @Container
@@ -49,6 +53,17 @@ class AccountJpaAdapterIT {
         reg.add("spring.jpa.hibernate.ddl-auto", () -> "validate");
     }
 
+    @TestConfiguration
+    static class TestCfg {
+        @Bean
+        AccountJpaAdapter accountJpaAdapter(SpringDataUserRepository userRepository, SpringDataAccountRepository accountRepository) {
+            return new AccountJpaAdapter(accountRepository, userRepository);
+        }
+        @Bean
+        UserJpaAdapter userJpaAdapter(SpringDataUserRepository userRepo, RoleJpaRepository roleJpaRepository) {
+            return new UserJpaAdapter(userRepo, roleJpaRepository);
+        }
+    }
     @Resource
     private AccountJpaAdapter accountAdapter;
 

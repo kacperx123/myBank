@@ -1,4 +1,4 @@
-package com.app.mybank.infastructure.security;
+package com.app.mybank.infrastructure.security;
 
 import com.app.mybank.domain.user.User;
 import com.app.mybank.application.user.port.UserRepository;

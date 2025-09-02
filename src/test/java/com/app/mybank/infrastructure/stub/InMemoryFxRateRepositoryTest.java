@@ -2,7 +2,6 @@ package com.app.mybank.infrastructure.stub;
 
 import com.app.mybank.domain.fx.FxRate;
 import com.app.mybank.domain.fx.FxRateId;
-import com.app.mybank.infastructure.stub.InMemoryFxRateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

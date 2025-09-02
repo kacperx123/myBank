@@ -9,6 +9,9 @@ import com.app.mybank.domain.transaction.TransactionType;
 import com.app.mybank.domain.user.User;
 import com.app.mybank.domain.user.UserId;
 import com.app.mybank.persistence.account.AccountJpaAdapter;
+import com.app.mybank.persistence.account.SpringDataAccountRepository;
+import com.app.mybank.persistence.role.RoleJpaRepository;
+import com.app.mybank.persistence.user.SpringDataUserRepository;
 import com.app.mybank.persistence.user.UserJpaAdapter;
 import com.app.mybank.testutil.UserTestFactory;
 import jakarta.annotation.Resource;
@@ -16,9 +19,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -33,7 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import({TransactionJpaAdapter.class, AccountJpaAdapter.class, UserJpaAdapter.class})
+@Import({TransactionJpaAdapterIT.TestCfg.class})
 class TransactionJpaAdapterIT {
 
     @Container
@@ -51,6 +57,21 @@ class TransactionJpaAdapterIT {
         reg.add("spring.flyway.enabled", () -> "true");
     }
 
+    @TestConfiguration
+    static class TestCfg {
+        @Bean
+        TransactionJpaAdapter transactionJpaAdapter(SpringDataTransactionRepository transactionRepo) {
+            return new TransactionJpaAdapter(transactionRepo);
+        }
+        @Bean
+        AccountJpaAdapter accountJpaAdapter(SpringDataUserRepository userRepository, SpringDataAccountRepository accountRepository) {
+            return new AccountJpaAdapter(accountRepository, userRepository);
+        }
+        @Bean
+        UserJpaAdapter userJpaAdapter(SpringDataUserRepository userRepo, RoleJpaRepository roleJpaRepository) {
+            return new UserJpaAdapter(userRepo, roleJpaRepository);
+        }
+    }
     @Resource TransactionJpaAdapter txAdapter;
     @Resource AccountJpaAdapter accountAdapter;
     @Resource UserJpaAdapter userAdapter;

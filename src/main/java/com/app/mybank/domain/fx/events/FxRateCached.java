@@ -5,5 +5,5 @@ import com.app.mybank.domain.fx.FxRate;
 
 import java.time.Instant;
 
-public record CurrencyRateCached(FxRate rate, Instant occurredAt)
+public record FxRateCached(FxRate rate, Instant occurredAt)
         implements DomainEvent {}
